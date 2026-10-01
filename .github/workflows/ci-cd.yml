@@ -1,0 +1,86 @@
+name: CI/CD Pipeline - Staging & Beta
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - beta
+  pull_request:
+    branches:
+      - main
+      - staging
+      - beta
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-artifacts
+          path: dist/
+          retention-days: 7
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build
+    if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.techvestglobal.com
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-artifacts
+          path: dist
+
+      - name: Deploy to Staging Environment
+        run: |
+          echo "Deploying to Staging Environment..."
+          # Insert hosting provider CLI command here (e.g. Vercel, AWS S3, Cloudflare Pages, etc.)
+          echo "Staging deployment completed successfully."
+
+  deploy-beta:
+    name: Deploy to Beta
+    needs: build
+    if: github.ref == 'refs/heads/beta' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: beta
+      url: https://beta.techvestglobal.com
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-artifacts
+          path: dist
+
+      - name: Deploy to Beta Environment
+        run: |
+          echo "Deploying to Beta Environment..."
+          # Insert hosting provider CLI command here (e.g. Vercel, AWS S3, Cloudflare Pages, etc.)
+          echo "Beta deployment completed successfully."
