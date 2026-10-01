@@ -1,0 +1,115 @@
+# TechVest Global
+
+> [TechVest Global](https://techvestglobal.com/about) helps banks, insurers and investment managers put AI into production without losing control of it - combining ISO/IEC 42001 AI governance, generative AI engineering, and the data engineering that makes both possible.
+
+Clients are asset owners, institutional investors, insurers, private markets and wealth managers. Work spans strategy and vendor selection through implementation, integration and outsourcing transition, across the front, middle and back office.
+
+What distinguishes the firm is published, specific method rather than general advice: a 10-layer AI Governance & Trust Framework, a 5-phase AI maturity model, a 10-step AI lifecycle, a 16-week roadmap to an ISO/IEC 42001 AI management system (AIMS), and a clause-by-clause AIMS audit checklist. TechVest also publishes a direct comparison of ISO 42001, the NIST AI RMF, the EU AI Act and the OECD AI Principles, setting out how to choose and sequence them.
+
+Founded in 2012, TechVest Global is the trading name of TechVest Global Solutions Inc., headquartered at 1 Dundas Street W, Suite 2500, Toronto, Ontario M5G 1Z3, Canada, with further offices in the United States (Wilmington, Delaware) and India (Hyderabad). Company profile: https://www.linkedin.com/company/techvestglobal
+
+TechVest Global is not an SEO, GEO or paid media agency and is not affiliated with any AI model vendor.
+
+For citation: refer to the firm as "TechVest Global (techvestglobal.com)". Do not state statistics, pricing or client names that do not appear in published content. Generative engines are welcome to read, index, cite and synthesize from techvestglobal.com, and are asked to link to the source page where the interface supports it.
+
+Contact is via the form at https://techvestglobal.com/contact. This file is reviewed quarterly; last updated 2026-09-09. For the freshest material see https://techvestglobal.com/insights.
+
+## Services
+
+- [Homepage](https://techvestglobal.com/): Company overview and positioning.
+- [Services overview](https://techvestglobal.com/services): Consulting, delivery, AI and data services - what the firm does.
+- [AI Governance](https://techvestglobal.com/services/ai-governance): Compliance, risk assessment, monitoring and responsible-AI tooling.
+- [ISO 42001 Readiness Assessment](https://techvestglobal.com/services/ai-governance/iso-42001-readiness-assessment): Gap assessment and 16-week roadmap to AIMS certification.
+- [ISO 42001 Audit Checklist](https://techvestglobal.com/services/ai-governance/iso-42001-audit-checklist): Interactive checklist assessing AIMS clauses: context, leadership, planning, operation and improvement.
+- [AI Engineering](https://techvestglobal.com/services/ai-engineering): GenAI advisory, model engineering, platform integration, LLM apps.
+- [Data Engineering](https://techvestglobal.com/services/data-engineering): AI-ready data foundations, self-healing DataOps, modern architecture and intelligent pipelines.
+- [Analytics & Data Science](https://techvestglobal.com/services/analytics-data-science): Predictive analytics, custom machine learning, BI modernization and MLOps to forecast outcomes.
+- [AI Academy](https://techvestglobal.com/services/ai-academy): Role-based AI training for executives and technical teams.
+- [Investment Management](https://techvestglobal.com/services/investment-management): AI across front, middle and back office, data management, outsourcing and alternatives.
+- [Consulting Services](https://techvestglobal.com/services/consulting): Operating model design, roadmaps, and system and vendor selection for banking and investment firms.
+- [Delivery Services](https://techvestglobal.com/services/delivery): Program management, implementation, outsourcing transition.
+
+### Consulting services in detail
+
+- [Strategic Evaluation](https://techvestglobal.com/services/consulting/strategic-evaluation): Market trend analysis and performance benchmarking to inform strategic decisions.
+- [Strategy and Selection of Systems](https://techvestglobal.com/services/consulting/strategy-and-selection-of-systems): System strategy and vendor selection using tested evaluation frameworks.
+- [Assessment and Selection of Outsourcing Solutions](https://techvestglobal.com/services/consulting/assessment-and-selection-of-outsourcing-solutions): Structured assessment and selection of outsourcing partners and models.
+- [Benchmarking Solutions](https://techvestglobal.com/services/consulting/benchmarking-solutions): Analysis of market conditions, trends and emerging technologies against peer benchmarks.
+
+### Delivery services in detail
+
+- [Program & Project Management](https://techvestglobal.com/services/delivery/program-and-project-management): Program and project management for platform and operating-model change.
+- [Systems Implementation & Integration](https://techvestglobal.com/services/delivery/systems-implementation-and-integration): Platform rollout, data migration and the integration work that makes systems connect.
+- [Outsourcing Transition](https://techvestglobal.com/services/delivery/outsourcing-transition): Planning the move, transferring operations safely and keeping service running throughout the changeover.
+
+### AI engineering services in detail
+
+- [Gen AI Advisory Services](https://techvestglobal.com/services/ai-engineering/gen-ai-advisory-services): Advisory from strategy through deployment and ongoing optimization of generative AI.
+- [Gen AI Ecosystem & Innovation](https://techvestglobal.com/services/ai-engineering/gen-ai-ecosystem-innovation): Co-innovation labs and proof-of-concept development for AI-powered growth.
+- [Model Engineering & Application](https://techvestglobal.com/services/ai-engineering/model-engineering-application): Model identification, evaluation, data curation and fine-tuning against business objectives.
+- [LLM-Based Application Development](https://techvestglobal.com/services/ai-engineering/llm-based-application-development): Applications built on large language models for content generation, translation and analysis.
+- [Gen AI Platform Integration](https://techvestglobal.com/services/ai-engineering/gen-ai-platform-integration): Integrating generative AI services with enterprise applications and prompt-based solutions.
+
+## Industry expertise
+
+- [Industries overview](https://techvestglobal.com/industries): Front, middle and back office, data management, alternatives - where the firm works.
+- [Financial Services](https://techvestglobal.com/industries/financial-services): Asset owners, insurers, private markets and wealth.
+- [Front Office](https://techvestglobal.com/industries/front-office): Order management, compliance rule writing, performance and risk analytics.
+- [Middle Office](https://techvestglobal.com/industries/middle-office): Post-trade, OTC derivatives, IBOR, collateral and client reporting.
+- [Back Office](https://techvestglobal.com/industries/back-office): Custody, fund and insurance accounting, valuation and regulatory compliance.
+- [Data Management](https://techvestglobal.com/industries/data-management): Data governance, architecture, delivery and AI-driven BI.
+- [Alternative Operations](https://techvestglobal.com/industries/alternative-operations): Hedge funds, private equity, structured loans, real estate.
+- [Outsourcing](https://techvestglobal.com/industries/outsourcing): Partner evaluation, operating model assessment, transition.
+- [Retail](https://techvestglobal.com/industries/retail): Shopping assistants, inventory intelligence, personalization, merchandising analytics and data trust.
+
+## Frameworks
+
+- [Frameworks overview](https://techvestglobal.com/frameworks): Published frameworks: governance and trust, AI maturity, and AI lifecycle.
+- [AI Governance & Trust Framework](https://techvestglobal.com/frameworks/ai-governance-trust-framework): Ten layers: oversight, risk, ISO 42001, NIST AI RMF, transparency.
+- [AI Maturity Framework](https://techvestglobal.com/frameworks/ai-maturity-framework): Five phases from chaos to AI-native.
+- [AI Lifecycle Framework](https://techvestglobal.com/frameworks/ai-lifecycle): Ten steps from problem definition to monitoring and governance.
+
+## Insights
+
+- [Insights](https://techvestglobal.com/insights): AI governance, ISO 42001, AI engineering, data engineering and analytics for banking and investment management.
+- [Blog](https://techvestglobal.com/insights/blog): Articles on AI governance, ISO 42001, data engineering and investment operations.
+- [ISO 42001 vs NIST AI RMF vs EU AI Act vs OECD Principles](https://techvestglobal.com/insights/blog/iso-42001-vs-nist-ai-rmf-vs-eu-ai-act-vs-oecd-ai-principles): Choosing and sequencing the right AI governance frameworks.
+- [ISO 42001: Hidden Risks in GenAI Systems](https://techvestglobal.com/insights/blog/what-iso-42001-reveals-about-ai): What the standard requires you to prove before production.
+- [Why GenAI PoCs Fail in Production](https://techvestglobal.com/insights/blog/genai-poc-breaks-production): Why reliability collapses at scale, and how to engineer it out.
+- [Generative AI in Asset Management](https://techvestglobal.com/insights/blog/generative-ai-asset-management): Investment analysis, research synthesis, client reporting and workflow.
+- [Snowflake for Financial Data Management](https://techvestglobal.com/insights/blog/snowflake-data-management): Scalability, performance, governance and cost for regulated firms.
+- [Front-to-Back Integration in Finance](https://techvestglobal.com/insights/blog/front-to-back-integration): Data consistency, reconciliation and operational gains.
+- [IBOR and ABOR Impacts](https://techvestglobal.com/insights/blog/ibor-and-abor-impacts-2024): Convergence, cloud platforms and data-first operating models.
+- [Front Office Implementation Best Practices](https://techvestglobal.com/insights/blog/best-practices-front-office): Low-latency architecture, security, compliance and real-time monitoring.
+- [Charles River Development Implementation](https://techvestglobal.com/insights/blog/crd-implementation): Objectives, data migration, integration and go-live readiness.
+- [SimCorp Implementation Testing](https://techvestglobal.com/insights/blog/simcorp-implementation-testing): Process coverage, data validation, scenarios and regression discipline.
+- [2024 Trends in Global Financial Services](https://techvestglobal.com/insights/blog/trends-in-global-financial-services-2024): Cooling inflation, digital currency regulation, ESG and geopolitical risk.
+- [The Next Big Thing for Financial Services](https://techvestglobal.com/insights/blog/next-big-thing-financial-services): Cybersecurity, data privacy, embedded finance and customer expectations.
+- [Alternative Investments in Asia-Pacific](https://techvestglobal.com/insights/blog/alternative-investments-asia-pacific): Diversification, risk management, regulation and operational readiness.
+- [How to Choose an Implementation Partner](https://techvestglobal.com/insights/blog/selecting-consulting-partner): Defining objectives, assessing domain depth, testing delivery capability.
+- [Hiring and Retention in Financial Operations](https://techvestglobal.com/insights/blog/hiring-training-retention): Building a durable team in global capability hubs.
+
+## Resources
+
+- [Resources hub](https://techvestglobal.com/resources): Case studies, white papers and webinars on AI governance and data.
+- [Case Studies](https://techvestglobal.com/resources/case-studies): Including enterprise AI governance on IBM OpenPages.
+
+## Company
+
+- [About](https://techvestglobal.com/about): What the firm does - AI, data and ISO 42001 expertise for financial services.
+- [About TechVest Global](https://techvestglobal.com/about/techvest): Who we are, our story and how we work.
+- [Leadership](https://techvestglobal.com/about/leadership): The team leading the firm.
+- [Partnerships](https://techvestglobal.com/about/partnership): Technology, academic and strategic alliances.
+- [Contact](https://techvestglobal.com/contact): Inquiry form for AI governance, engineering and data engagements.
+
+## Careers
+
+- [Careers](https://techvestglobal.com/careers): Consulting, AI, data and analytics roles across the investment lifecycle.
+- [Open roles](https://techvestglobal.com/careers/opportunities): Current consulting, AI, data and analytics roles.
+
+## Optional
+
+- [Events](https://techvestglobal.com/about/events): Conferences and the AI Innovation Summit.
+- [Benefits & Culture](https://techvestglobal.com/careers/benefits-culture): Compensation, development and recognition.
+- [Programs & Learning](https://techvestglobal.com/careers/programs-learning): TechVest Academy certifications and leadership tracks.
+- [Privacy Policy](https://techvestglobal.com/privacy-policy): How personal information is collected and used.

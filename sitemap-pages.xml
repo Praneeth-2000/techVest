@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap-pages.xml — techvestglobal.com
+  Canonical, crawlable URLs only. Duplicate routes are intentionally
+  excluded (/TechVestHome, /services/professional and its detail pages,
+  /insights/resources, /service/<slug> aliases) to avoid sending
+  conflicting signals. The six expertise pages are canonical at
+  /industries/<slug>; /service/<slug> still routes for old links and
+  canonicalises here.
+  /resources/white-papers and /resources/webinars are omitted while
+  robots.txt disallows them - submitting a blocked URL is a Search
+  Console error. Restore both when the disallow is lifted.
+  NOTE: <lastmod> is the git commit date of the files that render each page
+  (its component, plus any data module it reads). SEO.jsx is deliberately
+  excluded - it touches every page's head, so including it would stamp one
+  identical date on every URL and tell a crawler nothing about what changed. Individual job postings
+  (/careers/opportunities/<id>) are backend-driven and must be appended
+  from the live careers API.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
+  <url><loc>https://techvestglobal.com/</loc><lastmod>2026-08-03</lastmod></url>
+
+  <!-- About -->
+  <url><loc>https://techvestglobal.com/about</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/about/techvest</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/about/leadership</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/about/partnership</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/about/events</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Services: overview & categories -->
+  <url><loc>https://techvestglobal.com/services</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/consulting</loc><lastmod>2026-08-30</lastmod></url>
+  <!-- "/services/professional" is intentionally omitted: it duplicates
+       /services/consulting and now canonicalises to it. Its four detail
+       pages were already excluded for the same reason. -->
+  <url><loc>https://techvestglobal.com/services/delivery</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-engineering</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-academy</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/investment-management</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/data-engineering</loc><lastmod>2026-07-16</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/analytics-data-science</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-governance</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-governance/iso-42001-readiness-assessment</loc><lastmod>2026-07-16</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-governance/iso-42001-audit-checklist</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Services: consulting detail pages -->
+  <url><loc>https://techvestglobal.com/services/consulting/strategic-evaluation</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/consulting/strategy-and-selection-of-systems</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/consulting/assessment-and-selection-of-outsourcing-solutions</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/consulting/benchmarking-solutions</loc><lastmod>2026-09-09</lastmod></url>
+
+  <!-- Services: delivery detail pages -->
+  <url><loc>https://techvestglobal.com/services/delivery/program-and-project-management</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/delivery/systems-implementation-and-integration</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/delivery/outsourcing-transition</loc><lastmod>2026-09-09</lastmod></url>
+
+  <!-- Services: AI engineering detail pages -->
+  <url><loc>https://techvestglobal.com/services/ai-engineering/gen-ai-advisory-services</loc><lastmod>2026-07-16</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-engineering/gen-ai-ecosystem-innovation</loc><lastmod>2026-07-16</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-engineering/model-engineering-application</loc><lastmod>2026-07-16</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-engineering/llm-based-application-development</loc><lastmod>2026-07-16</lastmod></url>
+  <url><loc>https://techvestglobal.com/services/ai-engineering/gen-ai-platform-integration</loc><lastmod>2026-07-16</lastmod></url>
+
+  <!-- Industries -->
+  <url><loc>https://techvestglobal.com/industries</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/financial-services</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/retail</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Industry expertise detail pages -->
+  <url><loc>https://techvestglobal.com/industries/front-office</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/middle-office</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/back-office</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/data-management</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/outsourcing</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/industries/alternative-operations</loc><lastmod>2026-09-09</lastmod></url>
+
+  <!-- Frameworks -->
+  <url><loc>https://techvestglobal.com/frameworks</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/frameworks/ai-lifecycle</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/frameworks/ai-maturity-framework</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/frameworks/ai-governance-trust-framework</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Insights: overview -->
+  <url><loc>https://techvestglobal.com/insights</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog</loc><lastmod>2026-08-30</lastmod></url>
+  <!-- The four "/insights/<slug>" standalone articles are intentionally omitted:
+       each is a shorter twin of a full post under /insights/blog/ and now
+       canonicalises to it, so submitting both would put the two versions of the
+       same article in competition. The URLs still resolve for old inbound links. -->
+
+
+  <!-- Insights: blog posts -->
+  <url><loc>https://techvestglobal.com/insights/blog/iso-42001-vs-nist-ai-rmf-vs-eu-ai-act-vs-oecd-ai-principles</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/what-iso-42001-reveals-about-ai</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/genai-poc-breaks-production</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/trends-in-global-financial-services-2024</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/ibor-and-abor-impacts-2024</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/best-practices-front-office</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/generative-ai-asset-management</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/snowflake-data-management</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/front-to-back-integration</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/simcorp-implementation-testing</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/alternative-investments-asia-pacific</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/next-big-thing-financial-services</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/selecting-consulting-partner</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/crd-implementation</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/insights/blog/hiring-training-retention</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Resources -->
+  
+  <url><loc>https://techvestglobal.com/resources</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/resources/case-studies</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Careers -->
+  <url><loc>https://techvestglobal.com/careers</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/careers/opportunities</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://techvestglobal.com/careers/benefits-culture</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/careers/programs-learning</loc><lastmod>2026-08-30</lastmod></url>
+
+  <!-- Company -->
+  <url><loc>https://techvestglobal.com/contact</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://techvestglobal.com/privacy-policy</loc><lastmod>2026-08-30</lastmod></url>
+
+</urlset>

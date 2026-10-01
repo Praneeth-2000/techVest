@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml - GENERATED index, do not edit by hand.
+  Written by scripts/generate-sitemaps.mjs. robots.txt points here; each child
+  sitemap below is fetched separately by a crawler.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>https://techvestglobal.com/sitemap-pages.xml</loc><lastmod>2026-09-16</lastmod></sitemap>
+  <sitemap><loc>https://techvestglobal.com/sitemap-jobs.xml</loc><lastmod>2026-09-16</lastmod></sitemap>
+</sitemapindex>

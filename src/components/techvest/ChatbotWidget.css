@@ -1,0 +1,535 @@
+/* ============================================================
+   TechVest AI Chatbot Widget — Styles
+   ============================================================
+   This CSS contains ONLY the chatbot bubble + chat window styles.
+   It does NOT affect the rest of your website.
+   All selectors are scoped to chatbot-specific class names.
+   ============================================================ */
+
+/* ---- CSS Variables (override these to match your site theme) ---- */
+:root {
+    --tvbot-primary: #6366f1;
+    --tvbot-secondary: #8b5cf6;
+    --tvbot-accent: #ec4899;
+    --tvbot-dark-bg: #0f172a;
+    --tvbot-darker-bg: #020617;
+    --tvbot-text-light: #f8fafc;
+    --tvbot-text-gray: #94a3b8;
+    --tvbot-border: #1e293b;
+    --tvbot-success: #10b981;
+}
+
+/* ---- Floating Chat Button ---- */
+.chat-button {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--tvbot-primary) 0%, var(--tvbot-secondary) 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s;
+    z-index: 999;
+    animation: tvbot-pulse 2s infinite;
+    display: flex;
+    /* Center the icon */
+    align-items: center;
+    /* Center the icon */
+    justify-content: center;
+    /* Center the icon */
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+}
+
+@keyframes tvbot-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 10px 35px rgba(99, 102, 241, 0.6);
+    }
+}
+
+/* ---- Chatbot Container ---- */
+.chatbot-container {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 440px;
+    height: 650px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 1.5rem;
+    border: 1px solid var(--tvbot-border);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(calc(100% + 60px));
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chatbot-container.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ---- Chatbot Header ---- */
+.chatbot-header {
+    background: linear-gradient(135deg, var(--tvbot-primary) 0%, var(--tvbot-secondary) 100%);
+    padding: 1.5rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bot-avatar {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    overflow: hidden;
+}
+
+.bot-avatar i,
+.bot-avatar svg {
+    display: block;
+    width: 60%;
+    /* Ensure it doesn't overflow or stay too small */
+    height: 60%;
+}
+
+.bot-logo {
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+}
+
+.bot-logo-small {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.bot-info h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.25rem 0;
+    color: white;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--tvbot-success);
+    border-radius: 50%;
+    animation: tvbot-blink 2s infinite;
+}
+
+p {
+    color: #ffffff;
+}
+
+@keyframes tvbot-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.chatbot-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* ---- Messages Area ---- */
+.chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: var(--tvbot-border);
+    border-radius: 3px;
+}
+
+.message {
+    display: flex;
+    gap: 0.75rem;
+    animation: tvbot-slideIn 0.3s ease-out;
+}
+
+@keyframes tvbot-slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+}
+
+.bot-message .message-avatar {
+    background: linear-gradient(135deg, var(--tvbot-primary) 0%, var(--tvbot-secondary) 100%);
+}
+
+.user-message {
+    flex-direction: row-reverse;
+}
+
+.user-message .message-avatar {
+    background: var(--tvbot-accent);
+}
+
+.message-content {
+    max-width: 75%;
+    font-size: 0.85rem;
+    background: rgba(30, 41, 59, 0.8);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--tvbot-border);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: var(--tvbot-text-light);
+}
+
+.message-content a {
+    word-break: break-all;
+    color: var(--tvbot-primary);
+    text-decoration: underline;
+}
+
+.message-content a:hover {
+    color: var(--tvbot-secondary);
+}
+
+.user-message .message-content {
+    background: linear-gradient(135deg, var(--tvbot-primary) 0%, var(--tvbot-secondary) 100%);
+}
+
+.message-content p {
+    margin: 0 0 0.5rem 0;
+    line-height: 1.5;
+}
+
+/* Markdown formatting in bot messages */
+.bot-message .message-content ul,
+.bot-message .message-content ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    /* Tailwind's preflight sets `ol,ul,menu{list-style:none}` globally. Without an
+       explicit list-style here, bot answers rendered as indented text with no
+       bullet or number markers. */
+    list-style-position: outside;
+}
+
+.bot-message .message-content ul { list-style-type: disc; }
+.bot-message .message-content ol { list-style-type: decimal; }
+
+/* Nested lists */
+.bot-message .message-content ul ul { list-style-type: circle; }
+.bot-message .message-content ul ul ul { list-style-type: square; }
+
+.bot-message .message-content li {
+    margin: 0.3rem 0;
+    line-height: 1.6;
+}
+
+.bot-message .message-content strong {
+    color: var(--tvbot-primary);
+    font-weight: 600;
+}
+
+.bot-message .message-content code {
+    background: rgba(99, 102, 241, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.bot-message .message-content h3 {
+    font-size: 0.95rem;
+    margin: 0.8rem 0 0.4rem;
+    color: var(--tvbot-primary);
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: var(--tvbot-text-gray);
+}
+
+/* ---- Typing Indicator ---- */
+.typing-indicator {
+    display: none;
+    padding: 0 1.5rem 1rem;
+    gap: 0.5rem;
+}
+
+.typing-indicator.active {
+    display: flex;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--tvbot-primary);
+    border-radius: 50%;
+    animation: tvbot-typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes tvbot-typing {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ---- Input Area ---- */
+.chatbot-input {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--tvbot-border);
+}
+
+.input-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 2rem;
+    padding: 0.5rem;
+    border: 1px solid var(--tvbot-border);
+    transition: border-color 0.3s;
+}
+
+.input-container:focus-within {
+    border-color: var(--tvbot-primary);
+}
+
+#userInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--tvbot-text-light);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+#userInput::placeholder {
+    color: var(--tvbot-text-gray);
+}
+
+.send-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--tvbot-primary) 0%, var(--tvbot-secondary) 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-button:hover {
+    transform: scale(1.1);
+}
+
+.input-footer {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.input-footer small {
+    color: var(--tvbot-text-gray);
+    font-size: 0.75rem;
+}
+
+/* ---- Suggested Questions ---- */
+.suggested-questions {
+    padding: 0.15rem 4.5rem 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    animation: tvbot-fadeIn 0.4s ease-out;
+}
+
+.suggestion-btn {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.08) 100%);
+    border: 1.5px solid rgba(99, 102, 241, 0.25);
+    color: var(--tvbot-text-light);
+    padding: 0.5rem 0.85rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.85rem;
+    font-family: inherit;
+    font-weight: 500;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.suggestion-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.suggestion-btn:hover::before {
+    opacity: 1;
+}
+
+.suggestion-btn i,
+.suggestion-btn svg {
+    color: var(--tvbot-primary);
+    font-size: 0.65rem;
+    filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.4));
+    flex-shrink: 0;
+}
+
+.suggestion-btn:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(139, 92, 246, 0.15) 100%);
+    border-color: rgba(99, 102, 241, 0.5);
+    transform: translateX(5px) translateY(-2px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+}
+
+.suggestion-btn:active {
+    transform: translateX(5px) translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+@keyframes tvbot-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .chatbot-container {
+        width: calc(100% - 40px);
+        right: 20px;
+        bottom: 80px;
+    }
+
+    .chat-button {
+        right: 20px;
+        bottom: 20px;
+    }
+}

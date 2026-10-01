@@ -1,0 +1,11 @@
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login/
+Disallow: /resources/white-papers
+Disallow: /resources/webinars
+Disallow: /services/professional
+
+
+Sitemap: https://techvestglobal.com/sitemap.xml
