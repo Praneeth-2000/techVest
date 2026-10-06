@@ -1,0 +1,258 @@
+RewriteEngine On
+RewriteBase /
+
+# Stop mod_dir from 301-redirecting /about to /about/. Every prerendered route is a
+# real directory (about/index.html), and mod_dir's trailing-slash redirect wins over
+# the internal rewrite below - tested on the server, /about still returned a 301 to
+# /about/ without this line. Canonicals, the sitemap and internal links all use the
+# no-slash form, so the redirect sent crawlers through two requests per page and
+# pointed every canonical at a URL that redirects.
+# Safe with the rewrite rules below: /about and /about/ both map to about/index.html.
+# The documented disclosure risk of turning this off applies only when directory
+# listings are enabled; they are disabled further down (Options -Indexes).
+DirectorySlash Off
+
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ---- Prerendered routes: serve folder index without a 301 -----------------
+# ADDED for the build-time prerendering rollout.
+#
+# Once dist/ is uploaded, each route (/about, /services, ...) exists as a REAL
+# DIRECTORY containing index.html. Apache's mod_dir would serve it, but only
+# after 301-redirecting /about -> /about/. That conflicts with the canonical
+# URLs SEO.jsx emits and the URLs sitemap.xml submits, which have NO trailing
+# slash - so every sitemap URL would redirect, and crawlers would spend two
+# requests per page instead of one.
+#
+# This rewrites INTERNALLY (no redirect), so the URL stays /about.
+# The RewriteCond makes it self-disabling: until the prerendered folders are
+# uploaded, the file does not exist and the rule never fires.
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.+?)/?$ /$1/index.html [L]
+
+RewriteRule ^index\.html$ - [L]
+RewriteRule ^app-shell\.html$ - [L]
+
+# ---- Fallback for URLs with no prerendered file -----------------------------
+# After the build, index.html is the prerendered HOME page, so falling back to it
+# served the home page's content (with a 200) for job detail pages, typos and any
+# other non-prerendered URL: duplicate content and soft 404s for crawlers, and a
+# flash of the home page for visitors. app-shell.html is the clean, empty app shell
+# kept by the build (see appShellPlugin in vite.config.js); the app then renders the
+# requested page - or its own noindex "not found" page - from scratch.
+# The first RewriteCond keeps this safe if an older build without app-shell.html is
+# deployed: the rule is skipped and the original index.html fallback below applies.
+RewriteCond %{DOCUMENT_ROOT}/app-shell.html -f
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /app-shell.html [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+
+# ============================================================================
+# TechVest Global - security response headers
+# Append this block to the site's .htaccess (Apache).
+# Requested by the TechVest security assessment (VAPT findings #4.4 and #5.2).
+# ============================================================================
+
+# ============================================================================
+# PLEASE READ FIRST - TWO-STAGE ROLLOUT
+#
+# The CSP below was written from the TechVest codebase we hold. If the live site
+# loads anything we could not see (analytics, tracking pixels, an extra font or
+# script host), a live CSP will BLOCK it silently and break that feature.
+#
+# So please roll it out in two stages:
+#
+#   STAGE 1 (do this first)
+#     Use the header name  Content-Security-Policy-Report-Only
+#     -> The browser REPORTS violations in DevTools -> Console but BLOCKS NOTHING.
+#     Leave it for a day or two. Browse the site: home, services, careers form,
+#     contact form, the chatbot. Note every "Refused to load..." message.
+#
+#   STAGE 2 (after Stage 1 is clean)
+#     Send us any violations you saw and we will adjust the policy, OR add the
+#     missing hosts yourself to the relevant directive.
+#     Then rename the header to  Content-Security-Policy  to begin enforcing.
+#
+# The other four headers below (X-Frame-Options, X-Content-Type-Options,
+# Referrer-Policy, Permissions-Policy) are low-risk and can be enforced
+# immediately. Only the CSP needs the two-stage treatment.
+# ============================================================================
+
+# ---- Disable directory listing -----------------------------------------
+# https://www.techvestglobal.com/assets/ currently returns an Apache
+# "Index of /assets" page enumerating all 150 files with names, sizes and
+# modification dates. This lets anyone inventory the site's assets and spot
+# superseded builds still present on the server.
+#
+# Assets continue to load normally by direct URL - only the LISTING is hidden.
+# This directive sits outside the mod_headers block because it is core Apache.
+Options -Indexes
+
+
+<IfModule mod_headers.c>
+
+    # ---- Content Security Policy -------------------------------------------
+    # STAGE 1: keep the header name as -Report-Only (below) while testing.
+    # STAGE 2: rename to "Content-Security-Policy" to enforce.
+    # Restricts where the page may load resources from, and (critically for the
+    # chatbot findings) which hosts images and frames may come from.
+    #
+    # NOTE ON 'unsafe-inline' / 'unsafe-eval': these are included because the
+    # current React/Vite build and the Tailwind play CDN rely on inline styles
+    # and inline script. They weaken the policy but the directives below still
+    # block the specific issues raised in the assessment - injected external
+    # images and injected external frames. Tightening these further would need a
+    # build change (nonces or hashes); happy to discuss separately.
+    #
+    # If a legitimate third-party service is blocked, please tell us which host
+    # and we will add it rather than dropping the directive.
+
+    Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://www.techvestglobal.com https://images.unsplash.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://techvest-chatbot-api-2026.azurewebsites.net https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.emailjs.com; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+    # ---- Clickjacking protection -------------------------------------------
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # ---- Block MIME-type sniffing ------------------------------------------
+    Header always set X-Content-Type-Options "nosniff"
+
+    # ---- Limit referrer leakage to third parties ---------------------------
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # ---- Deny access to device APIs the site does not use ------------------
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+
+    # ---- Force HTTPS for one year (HSTS) -----------------------------------
+    #
+    # NOTE: "includeSubDomains" has been DELIBERATELY OMITTED.
+    #
+    # We checked the live DNS and found ftp.techvestglobal.com resolves and
+    # serves HTTP (200) but has NO working HTTPS listener (TLS handshake fails).
+    # With includeSubDomains, browsers would force HTTPS on that host, making it
+    # unreachable - and because the browser caches the HSTS policy for the full
+    # max-age, that would persist for a YEAR and could not be quickly undone.
+    #
+    # Subdomains checked:  www (HTTPS ok) · mail (ok) · cpanel (ok) ·
+    #                      webmail (ok) · ftp (HTTP ONLY - the blocker)
+    #
+    # If ftp.techvestglobal.com is later given a valid certificate, or is
+    # retired, includeSubDomains can be added then.
+    Header always set Strict-Transport-Security "max-age=31536000"
+
+</IfModule>
+
+
+# ============================================================================
+# Notes
+#  - Hosts below were taken from the LIVE site (index.html + the JS bundle), so
+#    the following are already accounted for:
+#      googletagmanager.com / google-analytics.com  - Google Analytics (G-P8EJ2ZM5GC)
+#      images.unsplash.com                          - 39 image references in the bundle
+#      cdnjs.cloudflare.com                         - referenced from index.html
+#      www.google.com / www.gstatic.com             - reCAPTCHA on the careers form
+#      techvest-chatbot-api-2026.azurewebsites.net  - chatbot API
+#  - img-src is an ALLOWLIST. Unsplash is permitted because the site genuinely
+#    uses it; an attacker's arbitrary domain is still blocked, which is the
+#    control assessment finding #5 asked for.
+#  - connect-src permits the chatbot API and EmailJS (used by the contact
+#    forms). Add any other API the site calls from the browser.
+#  - connect-src also permits *.google-analytics.com and *.analytics.google.com:
+#    GA4 sends hits to regional endpoints (e.g. region1.google-analytics.com),
+#    not only www.google-analytics.com, so without these an ENFORCED CSP would
+#    silently stop analytics from recording visits.
+#  - img-src and connect-src also permit *.googletagmanager.com, and img-src
+#    permits *.google-analytics.com, matching Google's published CSP list for
+#    GA4 (developers.google.com/tag-platform/security/guides/csp). The wildcards
+#    also cover the www. hosts, so those explicit entries were removed.
+#  - frame-src permits Google reCAPTCHA, used on the careers form.
+#  - Please verify the site in a browser after applying, with DevTools ->
+#    Console open. CSP violations are reported there and are easy to fix once
+#    you can see which directive fired.
+# ============================================================================
+
+# ============================================================================
+# Performance - ADDED (compression + caching)
+#
+# Measured on production 2026-09-28: the server sent NO Content-Encoding and
+# NO Cache-Control. Homepage text assets totalled 1.94 MB uncompressed; gzipped
+# they are 0.53 MB (73% smaller). At PageSpeed's Slow-4G throttle that is ~10.2s
+# of download reduced to ~2.8s. The Azure test environment compresses
+# automatically, which is why test-env measurements did not surface this.
+# ============================================================================
+
+# ---- Compression ----------------------------------------------------------
+# Text formats only. JPEG/PNG/WebP/MP4/WOFF2 are already compressed - re-running
+# them through gzip costs CPU for no gain.
+# The <IfModule> guard matters: an unrecognised directive in .htaccess makes
+# Apache return HTTP 500 for EVERY request. If mod_deflate is absent this block
+# is skipped silently instead. Verify afterwards (see note at end of file).
+# `text/javascript` is listed alongside `application/javascript` deliberately: it is
+# the modern standard type and what Apache 2.4 sends with an up-to-date mime.types,
+# while the production server measured on 2026-09-28 sent `application/javascript`.
+# Listing only one of them means that on a host using the other, the 1.8 MB bundle -
+# by far the largest text asset - silently ships uncompressed while CSS and HTML
+# still compress, so the omission looks like success.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Brotli, where the host offers it: ~15-20% smaller than gzip on text, and supported
+# by every browser we care about. Apache negotiates automatically - a client that
+# sends `Accept-Encoding: br` gets Brotli, everything else still gets the gzip above.
+# Guarded the same way, so a host without mod_brotli skips this block silently.
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/x-javascript text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json application/xml
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+</IfModule>
+
+# ---- Content types for the SEO files ---------------------------------------
+# The rewrite rules above already serve these as real files, and stock Apache gets
+# their types right. These lines exist because serving robots.txt as `text/html` is
+# the exact failure production had before this file: Google records the file as
+# broken rather than missing, which is harder to notice. Two lines make it
+# impossible regardless of how the host's mime.types is configured.
+AddType text/plain .txt
+AddType application/xml .xml
+
+# ---- Caching --------------------------------------------------------------
+# Files under /assets/ carry a content hash in the filename
+# (e.g. index-CaS1pksQ.js), so changed content always gets a NEW url. Those are
+# safe to cache indefinitely. Everything else (favicon, logo, robots.txt) has a
+# stable name and must NOT be cached for a year.
+# Prerendered HTML must always revalidate, or a deploy stays invisible to
+# returning visitors.
+SetEnvIf Request_URI "^/assets/" LONG_CACHE
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable" env=LONG_CACHE
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ---- Verify after applying -------------------------------------------------
+#   curl -sI https://techvestglobal.com/about | head -1
+#     -> expect "200 OK", NOT "301 Moved Permanently"
+#   curl -sI -H "Accept-Encoding: gzip" https://techvestglobal.com/assets/<file>.js | grep -i content-encoding
+#     -> expect "Content-Encoding: gzip"; if absent, ask Hostinger for mod_deflate
+#   curl -sI https://techvestglobal.com/api/career.php | head -1
+#     -> MUST still work; the PHP app shares this document root
+# ============================================================================
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php80” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php80 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

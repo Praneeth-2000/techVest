@@ -122,7 +122,7 @@ export default function ResultsMetrics() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <SectionHeader
@@ -137,7 +137,7 @@ export default function ResultsMetrics() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           {metrics.map((metric, index) => {
             const Icon = metric.icon;

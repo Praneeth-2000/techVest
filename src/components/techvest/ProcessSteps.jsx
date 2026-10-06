@@ -74,7 +74,7 @@ export default function ProcessSteps() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <SectionHeader
@@ -114,7 +114,7 @@ function PhaseOrb({ phase, index, isActive, onHover }) {
       onFocus={onHover}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`relative rounded-[36px] border transition-all duration-500 text-left isolate ${isActive
         ? "border-white/30 bg-white/[0.04] shadow-[0_25px_70px_rgba(0,0,0,0.6)]"
@@ -161,7 +161,7 @@ function PhaseOrb({ phase, index, isActive, onHover }) {
               transform={`rotate(-90 ${ORB_SIZE / 2} ${ORB_SIZE / 2})`}
               initial={{ strokeDasharray: `0 ${CIRCUMFERENCE}` }}
               whileInView={{ strokeDasharray: `${arcLength} ${CIRCUMFERENCE}` }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
             />
             <circle
@@ -175,7 +175,7 @@ function PhaseOrb({ phase, index, isActive, onHover }) {
           </svg>
         </div>
         <div className="text-center space-y-2 sm:space-y-3 px-2 sm:px-4">
-          <p className="text-[10px] sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white/40">Phase 0{index + 1}</p>
+          <p className="text-[10px] sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white/40">{`Phase 0${index + 1}`}</p>
           <h3 className="text-xl sm:text-2xl font-semibold text-white">{phase.title}</h3>
           <p className="text-white/60 text-xs sm:text-sm font-medium">{phase.tagline}</p>
           {isActive && (

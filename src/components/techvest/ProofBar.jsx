@@ -71,7 +71,7 @@ function Counter({ end, duration = 2, prefix = "", suffix = "" }) {
       viewport={{ once: true }}
       onViewportEnter={() => setHasAnimated(true)}
     >
-      {prefix}{count}{suffix}
+      {`${prefix}${count}${suffix}`}
     </motion.div>
   );
 }
@@ -93,7 +93,7 @@ export default function ProofBar() {
               className={`relative group rounded-[24px] overflow-hidden border border-white/10 bg-gradient-to-b from-[#12131C] via-[#0C0D15] to-[#06070C] shadow-[0_25px_60px_rgba(2,2,8,0.7)] min-h-[340px] flex flex-col`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{
                 delay: index * 0.1,
                 duration: 0.6
@@ -112,7 +112,7 @@ export default function ProofBar() {
                   className="text-[11px] tracking-[0.45em] text-white/45 mb-7"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1 + 0.2 }}
                 >
                   {stat.label}
@@ -122,7 +122,7 @@ export default function ProofBar() {
                   className="mb-2"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1 + 0.3 }}
                 >
                   <div className="text-5xl font-semibold text-white mb-2">
@@ -142,7 +142,7 @@ export default function ProofBar() {
                   className="text-sm text-white/70 leading-relaxed"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1 + 0.4 }}
                 >
                   {stat.description}

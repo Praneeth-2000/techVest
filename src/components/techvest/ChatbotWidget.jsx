@@ -29,7 +29,7 @@ const ChatbotWidget = () => {
             id: 'initial',
             text: "Hello! I'm TechVest AI Assistant. How can I help you today?",
             sender: 'bot',
-            time: getCurrentTime(),
+            time: '',
             suggestedQuestions: [
                 "What AI services does TechVest offer?",
                 "Tell me about your data engineering solutions",

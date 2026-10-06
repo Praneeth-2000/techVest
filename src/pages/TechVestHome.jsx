@@ -12,6 +12,7 @@ import GlobalPresence from "../components/techvest/GlobalPresence";
 import ContactSection from "../components/techvest/ContactSection";
 import Footer from "../components/techvest/Footer";
 import Navigation from "../components/techvest/Navigation";
+import SEO from "../components/techvest/SEO";
 
 export default function TechVestHome() {
   const [scrollY, setScrollY] = useState(0);
@@ -24,6 +25,11 @@ export default function TechVestHome() {
 
   return (
     <div className="bg-[#0A0E27] text-white overflow-x-hidden">
+      <SEO
+        path="/"
+        title="AI Consulting for Financial Services"
+        description="TechVest Global is a strategic AI partner for banking, financial services and investment management, delivering AI governance, engineering, data and ISO 42001."
+      />
       <Navigation />
 
       <Hero scrollY={scrollY} />

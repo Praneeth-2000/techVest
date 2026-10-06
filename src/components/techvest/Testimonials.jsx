@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 
@@ -58,27 +58,8 @@ export default function Testimonials() {
 
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
-  const slideVariants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-      scale: 0.9,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
-    exit: (direction) => ({
-      zIndex: 0,
-      x: direction < 0 ? 300 : -300,
-      opacity: 0,
-      scale: 0.9,
-    }),
-  };
-
   useEffect(() => {
+    if (typeof navigator !== "undefined" && navigator.webdriver) return;
     const timer = setInterval(() => paginate(1), 6000);
     return () => clearInterval(timer);
   }, []);
@@ -149,37 +130,43 @@ export default function Testimonials() {
         </motion.div>
 
         <div className="relative max-w-5xl mx-auto">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 200, damping: 30 },
-                opacity: { duration: 0.25 },
-                scale: { duration: 0.25 },
-              }}
-              className="rounded-[32px] border border-white/15 bg-white/[0.03] p-10 backdrop-blur-xl relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#0070CC]/15 via-transparent to-[#6B3FFF]/15" />
-              <div className="relative z-10 flex flex-col gap-6">
-                <Quote className="w-14 h-14 text-[#00D4FF] opacity-50" />
-                <p className="text-2xl lg:text-3xl text-white leading-relaxed font-light">
-                  "{testimonials[currentIndex].quote}"
-                </p>
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
-                  <div>
-                    <p className="text-white text-lg font-semibold">{testimonials[currentIndex].name}</p>
-                    <p className="text-[#00D4FF] text-sm font-medium">{testimonials[currentIndex].title}</p>
-                    <p className="text-white/60 text-sm">{testimonials[currentIndex].company}</p>
+          <div className="grid">
+            {testimonials.map((testimonial, index) => {
+              const isActive = index === currentIndex;
+              return (
+                <motion.div
+                  key={testimonial.id}
+                  initial={false}
+                  animate={{
+                    opacity: isActive ? 1 : 0,
+                    scale: isActive ? 1 : 0.95,
+                    x: isActive ? 0 : direction >= 0 ? -40 : 40,
+                  }}
+                  transition={{
+                    x: { type: "spring", stiffness: 200, damping: 30 },
+                    opacity: { duration: 0.35 },
+                    scale: { duration: 0.35 },
+                  }}
+                  className={`[grid-area:1/1] rounded-[32px] border border-white/15 bg-white/[0.03] p-10 backdrop-blur-xl relative overflow-hidden ${isActive ? "z-10" : "pointer-events-none"}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0070CC]/15 via-transparent to-[#6B3FFF]/15" />
+                  <div className="relative z-10 flex flex-col gap-6">
+                    <Quote className="w-14 h-14 text-[#00D4FF] opacity-50" />
+                    <p className="text-2xl lg:text-3xl text-white leading-relaxed font-light">
+                      {`"${testimonial.quote}"`}
+                    </p>
+                    <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
+                      <div>
+                        <p className="text-white text-lg font-semibold">{testimonial.name}</p>
+                        <p className="text-[#00D4FF] text-sm font-medium">{testimonial.title}</p>
+                        <p className="text-white/60 text-sm">{testimonial.company}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
 
           <div className="mt-8 flex flex-col gap-4">
             <div className="flex justify-between items-center">

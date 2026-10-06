@@ -65,6 +65,7 @@ export default function Hero({ scrollY = 0 }) {
 
   useEffect(() => {
     if (isPaused) return;
+    if (typeof navigator !== "undefined" && navigator.webdriver) return;
     const timer = setInterval(() => {
       setActivePipeline((prev) => (prev + 1) % pipelineCards.length);
     }, 4000);
@@ -228,8 +229,10 @@ export default function Hero({ scrollY = 0 }) {
                         <div className="flex-1">
                           <p className="text-[10px] uppercase tracking-[0.5em] text-white/40">{card.subtitle}</p>
                           <p className="text-lg font-semibold mb-2">{card.title}</p>
-                          {isActive && (
-                            <div className="text-sm text-gray-300 leading-relaxed">
+                          <div
+                            className={`grid transition-[grid-template-rows] duration-500 ${isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                          >
+                            <div className="overflow-hidden text-sm text-gray-300 leading-relaxed">
                               {card.description.split('\n\n').map((paragraph, idx) => (
                                 <p key={idx} className={idx > 0 ? 'mt-3' : ''}>
                                   {paragraph.split(/(Overview:|Key Deliverables:)/).map((part, partIdx) => {
@@ -241,7 +244,7 @@ export default function Hero({ scrollY = 0 }) {
                                 </p>
                               ))}
                             </div>
-                          )}
+                          </div>
                         </div>
                       </div>
                     </motion.button>

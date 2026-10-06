@@ -169,7 +169,7 @@ const AnimatedWorldMap = () => {
             strokeWidth="0.6"
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 1.2, delay: shape.delay }}
           />
         ))}
@@ -186,7 +186,7 @@ const AnimatedWorldMap = () => {
             strokeDasharray="6 10"
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 1.6, delay: arc.delay }}
           />
         ))}
@@ -297,7 +297,7 @@ export default function GlobalPresence({ showStats = true }) {
                     style={{ top, left }}
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.12, type: "spring", stiffness: 180, damping: 14 }}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
